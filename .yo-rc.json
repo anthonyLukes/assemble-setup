@@ -1,0 +1,85 @@
+{
+  "generator-nerdery": {
+    "title": "assemble-test",
+    "name": "assemble-test",
+    "description": "Example project for Client.",
+    "version": "1.0.0",
+    "markup": "MarkupVanilla",
+    "styles": "StylesVanilla",
+    "scripts": "ScriptsVanilla",
+    "scriptsVanillaNamespace": "NRD",
+    "framework": "FrameworkVanilla",
+    "nerderyBower": {
+      "dependencies": {}
+    },
+    "nerderyCssLint": {},
+    "nerderyGrunt": {
+      "buildTask": [
+        "markup",
+        "styles",
+        "scripts"
+      ],
+      "copyConfig": [
+        "markup: {\n    files: [{\n        expand: true,\n        cwd: '<%= env.DIR_SRC %>',\n        dest: '<%= env.DIR_DEST %>',\n        src: ['**/*.html', '!assets/vendor/**']\n    }]\n}",
+        "styles: {\n    files: [{\n        expand: true,\n        cwd: '<%= env.DIR_SRC %>',\n        dest: '<%= env.DIR_DEST %>',\n        src: ['assets/{styles,vendor}/**/*.css']\n    }]\n}",
+        "scripts: {\n    files: [{\n        expand: true,\n        cwd: '<%= env.DIR_SRC %>',\n        dest: '<%= env.DIR_DEST %>',\n        src: ['assets/{scripts,vendor}/**/*.js']\n    }]\n}"
+      ],
+      "docsTask": [],
+      "initConfig": [
+        "\n// -- Style Tasks ------------------------------------------------------\n\ncssmin: {\n    options: {\n        banner: '<%= banner %>'\n    }\n}",
+        "\n// -- Script Tasks -------------------------------------------------------------\n\nuglify: {\n    options: {\n        banner: '<%= banner %>',\n        beautify: false,\n        mangle: true,\n        preserveComments: 'some'\n    }\n}"
+      ],
+      "installTask": [
+        "bowerInstall"
+      ],
+      "lintTask": [],
+      "registerTask": [
+        "grunt.registerTask('markup', ['copy:markup']);",
+        "if (grunt.option('dev')) {\n    grunt.registerTask('styles', ['copy:styles']);\n} else {\n    grunt.registerTask('styles', ['useminPrepare', 'concat', 'cssmin', 'usemin']);\n}",
+        "if (grunt.option('dev')) {\n    grunt.registerTask('scripts', ['copy:scripts']);\n} else {\n    grunt.registerTask('scripts', ['useminPrepare', 'concat', 'uglify', 'usemin']);\n}"
+      ],
+      "watchConfig": [
+        "markup: {\n    files: ['<%= env.DIR_SRC %>/**/*.html'],\n    tasks: ['markup']\n}",
+        "styles: {\n    files: ['<%= env.DIR_SRC %>/assets/{styles,vendor}/**/*.css'],\n    tasks: ['styles']\n}",
+        "scripts: {\n    files: ['<%= env.DIR_SRC %>/assets/{scripts,vendor}/**/*.js'],\n    tasks: ['scripts']\n}"
+      ]
+    },
+    "nerderyJsHint": {
+      "sub": true
+    },
+    "nerderyPackage": {
+      "devDependencies": {
+        "grunt-bower-install": "1.0.0",
+        "grunt-contrib-concat": "0.3.0",
+        "grunt-contrib-cssmin": "0.7.0",
+        "grunt-usemin": "2.0.2",
+        "grunt-contrib-uglify": "0.3.2"
+      }
+    },
+    "markupVanillaFeatures": {},
+    "markupContent": [],
+    "markupExtensionIn": "html",
+    "markupExtensionOut": "html",
+    "markupScripts": [
+      "<!-- build:js assets/scripts/main.js -->\n<!-- bower:js -->\n<!-- endbower --><%\nif (yo.scriptsShimmed.length) { %>\n<script src=\"assets/scripts/shim.js\"></script><%\n}\nyo.scriptsRequired.forEach(function(script) { %>\n<script src=\"<%= script.from %>\"></script><%\n}); %>\n<script src=\"assets/scripts/main.js\"></script>\n<!-- endbuild -->\n"
+    ],
+    "markupScriptsEntryPoint": "src/index.html",
+    "markupStyles": [
+      "<!-- build:css assets/styles/screen.css -->\n<!-- bower:css -->\n<!-- endbower -->\n<link rel=\"stylesheet\" media=\"screen, projection\" href=\"assets/styles/screen.css\" /><%\nyo.stylesImported.forEach(function(style) { %>\n<link rel=\"stylesheet\" media=\"screen, projection\" href=\"<%= style %>\" /><%\n}); %>\n<!-- endbuild --><%\nif (yo.stylesVanillaFeatures.ie9Conditional) { %>\n<!--[if IE 9]><link rel=\"stylesheet\" media=\"screen, projection\" href=\"assets/styles/ie9.css\" /><![endif]--><%\n}\nif (yo.stylesVanillaFeatures.ie8Conditional) { %>\n<!--[if lte IE 8]><link rel=\"stylesheet\" media=\"screen, projection\" href=\"assets/styles/ie8.css\" /><![endif]--><%\n}\nif (yo.stylesVanillaFeatures.ie7Conditional) { %>\n<!--[if lte IE 7]><link rel=\"stylesheet\" media=\"screen, projection\" href=\"assets/styles/ie7.css\" /><![endif]--><%\n}\nif (yo.stylesVanillaFeatures.mediaQueries) { %>\n<link rel=\"stylesheet\" media=\"screen and (min-width: 480px)\" href=\"assets/styles/screen_small.css\" />\n<link rel=\"stylesheet\" media=\"screen and (min-width: 768px)\" href=\"assets/styles/screen_medium.css\" />\n<link rel=\"stylesheet\" media=\"screen and (min-width: 992px)\" href=\"assets/styles/screen_large.css\" />\n<link rel=\"stylesheet\" media=\"screen and (min-width: 1382px)\" href=\"assets/styles/screen_huge.css\" /><%\n}\nif (yo.stylesVanillaFeatures.print) { %>\n<link rel=\"stylesheet\" media=\"print\" href=\"assets/styles/print.css\" /><%\n} %>\n"
+    ],
+    "markupStylesEntryPoint": "src/index.html",
+    "stylesVanillaFeatures": {},
+    "stylesAlways": [],
+    "stylesImported": [],
+    "scriptsRequired": [
+      {
+        "as": "App",
+        "from": "assets/scripts/App.js",
+        "init": "window.app = new App();",
+        "resolved": "./App"
+      }
+    ],
+    "scriptsShimmed": [],
+    "frameworkVanillaFeatures": {}
+  }
+}
