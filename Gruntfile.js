@@ -218,6 +218,19 @@ module.exports = function(grunt) {
             }
         },
 
+        // -- Assemble ------------------------------------------------------
+
+        assemble: {
+            options: {
+                layoutdir: 'src/templates/layouts',
+                layout: ['default.hbs']
+            },
+            pages: {
+                src: ['src/*.hbs'],
+                dest: './web/'
+            }
+        },
+
         // -- Task Helpers -----------------------------------------------------
 
         // Instead of running a server preprocessor, files and directories may
@@ -270,12 +283,12 @@ module.exports = function(grunt) {
 
     // -- Tasks ----------------------------------------------------------------
     if (grunt.option('dev')) {
-        // Define the default task for development. 
+        // Define the default task for development.
         // Run `grunt`
         grunt.registerTask('default', ['build']);
-    } 
+    }
     else if (grunt.option('stage')) {
-        // Default task for staging. 
+        // Default task for staging.
         // Run `grunt --stage`
         grunt.registerTask('default', ['lint', 'build']);
     }
@@ -294,12 +307,12 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['clean:dest', 'concurrent:build', 'clean:tmp']);
     grunt.registerTask('docs', ['clean:docs', 'concurrent:docs', 'clean:tmp']);
 
-    // Custom tasks. 
+    // Custom tasks.
     // Typically used by the `concurrent` and `watch` tasks
     // but may be run manually with `grunt [task-name]`
     grunt.registerTask('media', ['copy:media']);
     grunt.registerTask('server', ['copy:server']);
-    grunt.registerTask('markup', ['copy:markup']);
+    grunt.registerTask('markup', ['assemble']);
     if (grunt.option('dev')) {
         grunt.registerTask('styles', ['copy:styles']);
     } else {

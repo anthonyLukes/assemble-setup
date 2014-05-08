@@ -22,7 +22,8 @@
     "grunt-contrib-concat": "0.3.0",
     "grunt-contrib-cssmin": "0.7.0",
     "grunt-usemin": "2.0.2",
-    "grunt-contrib-uglify": "0.3.2"
+    "grunt-contrib-uglify": "0.3.2",
+    "grunt-assemble": "0.1.13"
   },
   "scripts": {
     "postinstall": "node tools/npm-postinstall"
