@@ -223,7 +223,8 @@ module.exports = function(grunt) {
         assemble: {
             options: {
                 layoutdir: 'src/templates/layouts',
-                layout: ['default.hbs']
+                layout: ['default.hbs'],
+                partials: ['src/templates/partials/**/*.hbs' ]
             },
             pages: {
                 src: ['src/*.hbs'],
