@@ -1,6 +1,6 @@
 {
     "testData": {
-        "hdg": "Heading from page(3)",
-        "subHdg": "Sub Heading from page(4)"
+        "hdg": "Heading from json(3)",
+        "subHdg": "Sub Heading from json(4)"
     }
 }
