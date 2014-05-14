@@ -106,7 +106,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: '<%= env.DIR_SRC %>',
                     dest: '<%= env.DIR_DEST %>',
-                    src: ['**/*.html', '!assets/vendor/**']
+                    src: ['!assets/vendor/**']
                 }]
             },
             styles: {
@@ -312,7 +312,7 @@ module.exports = function(grunt) {
     // but may be run manually with `grunt [task-name]`
     grunt.registerTask('media', ['copy:media']);
     grunt.registerTask('server', ['copy:server']);
-    grunt.registerTask('markup', ['assemble']);
+    grunt.registerTask('markup', ['copy:markup','assemble']);
     if (grunt.option('dev')) {
         grunt.registerTask('styles', ['copy:styles']);
     } else {
