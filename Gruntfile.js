@@ -222,15 +222,16 @@ module.exports = function(grunt) {
 
         assemble: {
             options: {
+                layout: "default.hbs",
                 layoutdir: 'src/templates/layouts',
-                layout: ['default.hbs'],
                 flatten: true,
-                partials: ['src/templates/partials/**/*.hbs' ],
+                partials: 'src/templates/partials/**/*.hbs',
                 data: 'src/data/*.json'
             },
             pages: {
-                src: ['src/*.hbs'],
-                dest: './web/'
+                files: {
+                    'web/': ['src/*.hbs']
+                }
             }
         },
 
@@ -283,6 +284,9 @@ module.exports = function(grunt) {
             docs: ['yuidoc']
         }
     });
+
+    // need to manually load assemble since it's not prefixed with 'grunt-'
+    grunt.loadNpmTasks('assemble');
 
     // -- Tasks ----------------------------------------------------------------
     if (grunt.option('dev')) {
