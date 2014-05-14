@@ -224,7 +224,9 @@ module.exports = function(grunt) {
             options: {
                 layoutdir: 'src/templates/layouts',
                 layout: ['default.hbs'],
-                partials: ['src/templates/partials/**/*.hbs' ]
+                flatten: true,
+                partials: ['src/templates/partials/**/*.hbs' ],
+                data: 'src/data/*.json'
             },
             pages: {
                 src: ['src/*.hbs'],
